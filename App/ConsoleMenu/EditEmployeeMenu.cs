@@ -4,19 +4,14 @@ using App.Model;
 
 namespace App.ConsoleMenu
 {
-    class EditEmployeeMenu : IConsoleMenu
+    internal class EditEmployeeMenu : IConsoleMenu
     {
-        public void Display()
-        {
-            Console.WriteLine(new string('=', 30));
-            Console.WriteLine("----- Редактирование пользователя -----");
-            Console.WriteLine(new string('=', 30));
-        }
-
         public async Task ViewMenu() // Изменяем метод на асинхронный
         {
             await new ReadAllEmployeeMenu().ViewMenu();
-            Display();
+            Console.WriteLine(new string('=', 30));
+            Console.WriteLine("----- Редактирование пользователя -----");
+            Console.WriteLine(new string('=', 30));
             try
             {
                 while (true)
@@ -129,7 +124,7 @@ namespace App.ConsoleMenu
 
                     default:
                         Console.WriteLine("Неверный выбор.");
-                        continue; 
+                        continue;
                 }
 
                 await EmployeeDB.UpdateEmployeeAsync(employee);

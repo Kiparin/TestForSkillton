@@ -10,12 +10,13 @@ namespace App.DataBase
             : base(message, innerException) { }
     }
 
-    class EmployeeDB
+    internal class EmployeeDB
     {
         private const string DatabaseName = "EmployeeDB";
         private const string TableName = "Employees";
 
         private const string CreateDatabaseQuery = "CREATE DATABASE EmployeeDB";
+
         private const string CreateTableQuery = @"
             CREATE TABLE EmployeeDB.dbo.Employees (
                 EmployeeID INT PRIMARY KEY IDENTITY(1,1),
@@ -37,7 +38,7 @@ namespace App.DataBase
         public static async Task AddEmployeeAsync(Employee employee)
         {
             const string insertQuery = @"
-            INSERT INTO EmployeeDB.dbo.Employees (FirstName, LastName, Email, DateOfBirth, Salary) 
+            INSERT INTO EmployeeDB.dbo.Employees (FirstName, LastName, Email, DateOfBirth, Salary)
             VALUES (@FirstName, @LastName, @Email, @DateOfBirth, @Salary)";
 
             using (SqlConnection connection = new SqlConnection(Settings.CONNECTION_DB))
@@ -128,7 +129,7 @@ namespace App.DataBase
                         await connection.OpenAsync();
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            if (await reader.ReadAsync()) 
+                            if (await reader.ReadAsync())
                             {
                                 employee = new Employee
                                 {
@@ -160,8 +161,8 @@ namespace App.DataBase
         public static async Task UpdateEmployeeAsync(Employee employee)
         {
             const string updateQuery = @"
-            UPDATE EmployeeDB.dbo.Employees 
-            SET FirstName = @FirstName, LastName = @LastName, Email = @Email, DateOfBirth = @DateOfBirth, Salary = @Salary 
+            UPDATE EmployeeDB.dbo.Employees
+            SET FirstName = @FirstName, LastName = @LastName, Email = @Email, DateOfBirth = @DateOfBirth, Salary = @Salary
             WHERE EmployeeID = @EmployeeID";
 
             using (SqlConnection connection = new SqlConnection(Settings.CONNECTION_DB))

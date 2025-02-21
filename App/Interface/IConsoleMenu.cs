@@ -1,8 +1,7 @@
 ﻿namespace App.Interface
 {
-    interface IConsoleMenu
+    internal interface IConsoleMenu
     {
-        void Display();
         Task ViewMenu();
     }
 }

@@ -4,23 +4,17 @@ using App.Model;
 
 namespace App.ConsoleMenu
 {
-    class ReadAllEmployeeMenu : IConsoleMenu
+    internal class ReadAllEmployeeMenu : IConsoleMenu
     {
-        public void Display()
+        public async Task ViewMenu()
         {
             Console.Clear();
             Console.WriteLine(new string('=', 30));
             Console.WriteLine("----- Все пользователи -----");
             Console.WriteLine(new string('=', 30));
-        }
-
-        public async Task ViewMenu()
-        {
-            Display();
             try
             {
                 Console.WriteLine("Пользователи Системы");
-
                 var result = await EmployeeDB.GetAllEmployeesAsync();
                 await ViewEmployees(result);
             }

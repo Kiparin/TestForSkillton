@@ -4,20 +4,15 @@ using App.Model;
 
 namespace App.ConsoleMenu
 {
-    class AddNewEmployeeMenu : IConsoleMenu
+    internal class AddNewEmployeeMenu : IConsoleMenu
     {
-
-        public void Display()
+        public async Task ViewMenu()
         {
             Console.Clear();
             Console.WriteLine(new string('=', 30));
             Console.WriteLine("-----Добавить нового пользователя-----");
             Console.WriteLine(new string('=', 30));
-        }
 
-        public async Task ViewMenu()
-        {
-            Display();
             Employee newEmployee = CreateEmployeeFromConsole();
             try
             {
@@ -34,7 +29,7 @@ namespace App.ConsoleMenu
             }
         }
 
-        static Employee CreateEmployeeFromConsole()
+        private static Employee CreateEmployeeFromConsole()
         {
             Employee employee = new Employee();
 
